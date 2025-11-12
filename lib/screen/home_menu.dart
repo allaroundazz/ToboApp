@@ -1,4 +1,13 @@
+
+
 import 'package:flutter/material.dart';
+
+import 'package:toboapp/widgets/left_drawer.dart'; 
+
+import 'package:toboapp/screen/addproduct_form.dart'; 
+
+
+
 
 class ProductButtonsPage extends StatefulWidget {
   const ProductButtonsPage({super.key, required this.title});
@@ -23,12 +32,13 @@ class _ProductButtonsPageState extends State<ProductButtonsPage> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  // MODIFIKASI: Menggunakan VoidCallback untuk aksi
   Widget _buildProductButton({
     required BuildContext context,
     required String text,
     required IconData icon,
     required Color color,
-    required String snackBarMessage,
+    required VoidCallback onPressed, // Diubah dari String snackBarMessage
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -46,9 +56,7 @@ class _ProductButtonsPageState extends State<ProductButtonsPage> {
           ),
           elevation: 5,
         ),
-        onPressed: () {
-          _showSnackBar(context, snackBarMessage);
-        },
+        onPressed: onPressed, // Gunakan aksi yang diberikan
       ),
     );
   }
@@ -60,6 +68,8 @@ class _ProductButtonsPageState extends State<ProductButtonsPage> {
         title: Text(widget.title),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
+      // Tambahkan Drawer
+      drawer: const LeftDrawer(), 
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +80,9 @@ class _ProductButtonsPageState extends State<ProductButtonsPage> {
               text: "All Products",
               icon: Icons.list_alt,
               color: Colors.blue,
-              snackBarMessage: "Kamu telah menekan tombol All Products",
+              onPressed: () {
+                _showSnackBar(context, "Kamu telah menekan tombol All Products");
+              },
             ),
 
             _buildProductButton(
@@ -78,15 +90,24 @@ class _ProductButtonsPageState extends State<ProductButtonsPage> {
               text: "My Products",
               icon: Icons.inventory,
               color: Colors.green,
-              snackBarMessage: "Kamu telah menekan tombol My Products",
+              onPressed: () {
+                _showSnackBar(context, "Kamu telah menekan tombol My Products");
+              },
             ),
 
+            // NAVIGASI KE HALAMAN FORM (Persyaratan Dosen)
             _buildProductButton(
               context: context,
               text: "Create Product",
               icon: Icons.add_box,
               color: Colors.red,
-              snackBarMessage: "Kamu telah menekan tombol Create Product",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  // Navigasi ke class ProductFormPage
+                  MaterialPageRoute(builder: (context) => const ProductFormPage()), 
+                );
+              },
             ),
           ],
         ),

@@ -27,3 +27,34 @@ build(BuildContext context).
 
 Hot Reload adalah fitur yang sangat cepat (hampir instan) untuk melihat perubahan kode UI dan logika minor tanpa kehilangan state (keadaan) aplikasi saat ini.
 Hot Restart adalah proses yang lebih lambat, yang mengatur ulang seluruh aplikasi dari awal (mengeksekusi ulang main()), sehingga state aplikasi (semua data dan variabel) akan hilang dan direset ke nilai awal.
+
+
+
+
+TUGAS 8
+
+1. perbedaan navigator.push dan pushreplacement
+    navigator.push menumpuk halaman baru, jadi bisa kembali. Contohnya adalah ketika membuka halaman form
+
+    pushreplacement mengganti halaman saat ini, jadi tidak bisa kembali. Contohnya adalah ketika pindah dari halaman login ke halaman utama
+
+2. hierarki Saffold, AppBar, Drawer
+    Scaffold adalah kerangka dasar atau bisa saya katakan fondasi untuk satu halaman penuh 
+
+    AppBar adalah bilah judul di bagian atas, ditempatkan di properti AppBar milik Scaffold
+
+    Drawer adalah menu navigasi samping yang akan mengeluarkan menu saat ditekan, ditempatkan di properti drawer milik scaffold
+
+3. kelebihan widget layout pada form
+    Padding:L memberikan jarak di sekitar elemen form, jadi terlihat lebih bagus dan mencegah TextFormField menempel di tepi layar. Menurut saya ini adalah kelebihan dalam segi estetika
+
+    terdapat juga kelebihan dalam segi fungsionalitas yaitu ListView.
+    ListView (atau SingleChildScrollView) sangat penting agar halaman bisa di-scroll. Saat keyboard muncul, ListView memastikan input field yang ada di bagian bawah tidak tertutup, sehingga pengguna tetap bisa melihat apa yang mereka ketik.
+
+4. Saya mengaturnya di satu tempat terpusat, yaitu di file main.dart.
+
+Di dalam widget MaterialApp, saya menggunakan properti theme dan mengisinya dengan ThemeData. Di sinilah saya menentukan colorScheme untuk brand saya, seperti yang ada di kode saya:
+
+colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)
+
+Dengan mengatur ini, Flutter secara otomatis menerapkan warna biru tersebut ke AppBar, tombol, dan widget lainnya di seluruh aplikasi saya, sehingga tampilannya konsisten.
