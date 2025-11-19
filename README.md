@@ -58,3 +58,21 @@ Di dalam widget MaterialApp, saya menggunakan properti theme dan mengisinya deng
 colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)
 
 Dengan mengatur ini, Flutter secara otomatis menerapkan warna biru tersebut ke AppBar, tombol, dan widget lainnya di seluruh aplikasi saya, sehingga tampilannya konsisten.
+
+
+
+TUGAS 9
+
+1. Model Dart diperlukan untuk menjamin keamanan tipe data (type safety) dan struktur kode yang rapi. Jika hanya menggunakan Map<String, dynamic>, kita kehilangan validasi otomatis, sehingga kode menjadi rentan error (seperti salah ketik key) dan sulit dikelola (maintain) jangka panjang.
+
+2. Package http berfungsi untuk melakukan request standar yang sifatnya stateless (tidak mengingat sesi). Sebaliknya, CookieRequest dirancang khusus untuk menangani manajemen sesi dengan menyimpan cookies login secara otomatis, yang sangat krusial agar status autentikasi pengguna tetap terjaga saat berinteraksi dengan Django.
+
+3. CookieRequest harus tunggal dan dibagikan ke seluruh aplikasi (biasanya via Provider) agar sesi login konsisten. Jika setiap halaman membuat instance baru, data cookie sesi yang tersimpan akan hilang, menyebabkan pengguna dianggap logout setiap kali berpindah halaman.
+
+4. 10.0.2.2 ditambahkan ke ALLOWED_HOSTS karena itu adalah IP spesial bagi emulator Android untuk mengakses localhost komputer. Pengaturan CORS, SameSite, dan izin internet wajib ada agar pertukaran data dan penyimpanan cookie lintas domain diizinkan. Tanpa ini, aplikasi akan gagal terhubung atau login akan selalu gagal karena cookie ditolak.
+
+5. Data dari input form Flutter dikonversi menjadi JSON dan dikirim via method POST menggunakan CookieRequest ke URL Django. Django menerima, memvalidasi, dan menyimpannya ke database, lalu mengembalikan respon JSON. Flutter membaca respon tersebut untuk memberikan umpan balik ke pengguna (sukses/gagal).
+
+6. Saat login, kredensial dikirim ke Django untuk diverifikasi. Jika valid, Django membuat sesi dan mengirimkan session ID dalam cookie ke Flutter yang disimpan oleh CookieRequest. Selama cookie tersimpan, pengguna berstatus login. Saat logout, sesi dihapus di server dan cookie dihapus di Flutter.
+
+7. Saya memulainya dengan menyiapkan backend Django (View JSON, URL, konfigurasi CORS). Di Flutter, saya memasang Provider CookieRequest di root aplikasi, membuat model Dart dari respon JSON, lalu menghubungkan halaman Login, Register, dan Form Input dengan fungsi request untuk integrasi data antara kedua platform.

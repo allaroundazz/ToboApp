@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:toboapp/screen/home_menu.dart'; 
+import 'package:toboapp/screens/login.dart';
+import 'package:toboapp/screens/home_menu.dart'; 
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // Baris ini sudah benar dan akan berfungsi setelah import diperbaiki
-      home: const ProductButtonsPage(title: 'Menu Produk'),
+      home: const LoginPage(),
     );
   }
 }

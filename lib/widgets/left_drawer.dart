@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:toboapp/screen/home_menu.dart'; 
+import 'package:toboapp/screens/home_menu.dart'; 
 
-import 'package:toboapp/screen/addproduct_form.dart'; 
+import 'package:toboapp/screens/addproduct_form.dart'; 
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
